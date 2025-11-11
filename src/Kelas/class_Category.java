@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class class_Category extends class_koneksi{
+public class class_Category extends class_koneksi {
 
     private String categoryName;
     private int categoryId;
-    
-    private final Connection koneksi; //penggunaan FINAL membuat variabel koneksi hanya bisa diisi 1x 
+
+    private final Connection koneksi;               //penggunaan FINAL membuat variabel koneksi hanya bisa diisi 1x 
     private PreparedStatement ps;
     private Statement st;
     private ResultSet rs;
@@ -49,14 +49,10 @@ public class class_Category extends class_koneksi{
     public void tambahCategory() {
         query = "INSERT INTO category(categoryName) VALUES (?)";
         try {
-            ps = koneksi.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps = koneksi.prepareStatement(query);
             ps.setString(1, categoryName);
             ps.executeUpdate();
-             // Ambil ID yang baru dibuat (AUTO_INCREMENT)
-             rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int idBaru = rs.getInt(1);
-            }
+
             ps.close();
             JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan ");
         } catch (SQLException e) {
@@ -107,18 +103,6 @@ public class class_Category extends class_koneksi{
         return rs;
     }
 
-     public ResultSet autoID() {
-        query = "SELECT categoryId AS id FROM category";
-        try {
-            st = koneksi.createStatement();
-            rs = st.executeQuery(query);
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error saat generate Id Category!");
-            System.out.println(e);
-        }
-        return rs;
-    }
-
+   
 
 }

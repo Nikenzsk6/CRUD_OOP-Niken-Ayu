@@ -20,7 +20,7 @@ public class class_Product extends class_koneksi {
     private String productName, productDescription;
     private int productId, productCategory, productPrice;
     
-    private final Connection koneksi; //penggunaan FINAL membuat variabel koneksi hanya bisa diisi 1x 
+    private final Connection koneksi;                       //penggunaan FINAL membuat variabel koneksi hanya bisa diisi 1x 
     private PreparedStatement ps;
     private Statement st;
     private ResultSet rs;
@@ -170,17 +170,5 @@ public class class_Product extends class_koneksi {
         return "";
     }
     
-    public ResultSet autoID(){
-        query = "SELECT productId AS id FROM product";
-        try {
-            st = koneksi.createStatement();
-            rs = st.executeQuery(query);
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error saat generate Id Product!");
-            System.out.println(e);
-        }
-        return rs;
-    }
-    
+   
 }

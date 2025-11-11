@@ -5,19 +5,15 @@
 package Tampilan;
 
 import Kelas.class_Category;
-import Kelas.class_User;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HP
  */
-public class f_category extends javax.swing.JFrame {
+public final class f_category extends javax.swing.JFrame {
 
     /**
      * Creates new form f_category
@@ -26,29 +22,18 @@ public class f_category extends javax.swing.JFrame {
         initComponents();
         reset();
         load_table_category();
-        autoID();
+        
+        t_idcategory.setVisible(false);
+        lblID.setVisible(false);
     }
 
     void reset() {
         t_idcategory.setText(null);
         t_namacategory.setText(null);
+        t_idcategory.setVisible(false);
+        lblID.setVisible(false);
     }
 
-    void autoID() {
-        class_Category cat = new class_Category();
-        ResultSet rs = cat.autoID();
-
-        try {
-            if (rs.next()) {
-                int id = rs.getInt("id") + 1;
-                t_idcategory.setText(String.valueOf(id));
-            } else {
-                t_idcategory.setText("1");
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
 
     void load_table_category() {
         DefaultTableModel model = new DefaultTableModel();
@@ -207,9 +192,9 @@ public class f_category extends javax.swing.JFrame {
             .addGap(0, 760, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(13, 13, 13)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(13, 13, 13)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(8, 8, 8)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,8 +211,8 @@ public class f_category extends javax.swing.JFrame {
                                     .addComponent(b_kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(jLabel6)))
+                            .addGap(27, 27, 27)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(13, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -272,9 +257,9 @@ public class f_category extends javax.swing.JFrame {
     private void b_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_tambahActionPerformed
         // TODO add your handling code here:
         class_Category category = new class_Category();
-        category.setCategoryId(Integer.parseInt(t_idcategory.getText()));
         category.setCategoryName(t_namacategory.getText());
         category.tambahCategory();
+
         reset();
         load_table_category();
     }//GEN-LAST:event_b_tambahActionPerformed
@@ -305,6 +290,8 @@ public class f_category extends javax.swing.JFrame {
         String id = table_category.getValueAt(baris, 0).toString();
         String nama = table_category.getValueAt(baris, 1).toString();
 
+        t_idcategory.setVisible(true);
+        lblID.setVisible(true);
         t_idcategory.setText(id);
         t_namacategory.setText(nama);
 

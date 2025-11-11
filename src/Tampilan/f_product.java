@@ -4,7 +4,6 @@
  */
 package Tampilan;
 
-import Kelas.class_Category;
 import Kelas.class_Product;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,34 +21,24 @@ public class f_product extends javax.swing.JFrame {
     public f_product() {
         initComponents();
         reset();
-        autoID();
         loadTableProduct();
         comboCategory();
+        
+        tIdProduct.setVisible(false);
+        lblID.setVisible(false);
     }
     
     void reset(){
         tIdProduct.setText(null);
         tNamaProduct.setText(null);
-        cKategori.setSelectedItem(null);
+        cKategori.setSelectedItem(0);
         tDeskripsi.setText(null);
         tPrice.setText(null);
+        
+        tIdProduct.setVisible(false);
+        lblID.setVisible(false);
     }
     
-    void autoID(){
-        class_Product product = new class_Product();
-        ResultSet rs = product.autoID();
-        
-        try {
-            if(rs.next()){
-                int id = rs.getInt("id")+1;
-                tIdProduct.setText(String.valueOf(id));
-            } else {
-                tIdProduct.setText("1");
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
     
     void comboCategory() {
         class_Product product = new class_Product();
@@ -63,7 +52,7 @@ public class f_product extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        cKategori.setSelectedIndex(0);
+        cKategori.setSelectedItem(0);
     }
 
     void loadTableProduct(){
@@ -104,7 +93,7 @@ public class f_product extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
         tIdProduct = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tNamaProduct = new javax.swing.JTextField();
@@ -132,7 +121,7 @@ public class f_product extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 153, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        jLabel1.setText("ID Product");
+        lblID.setText("ID Product");
 
         jLabel2.setText("Nama Product");
 
@@ -169,7 +158,7 @@ public class f_product extends javax.swing.JFrame {
                     .addComponent(cKategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
+                            .addComponent(lblID)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
@@ -183,7 +172,7 @@ public class f_product extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -272,7 +261,7 @@ public class f_product extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(303, Short.MAX_VALUE)
+                .addContainerGap(311, Short.MAX_VALUE)
                 .addComponent(b_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
                 .addComponent(b_ubah)
@@ -293,8 +282,8 @@ public class f_product extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(14, 14, 14)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(13, Short.MAX_VALUE)))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(21, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,11 +317,11 @@ public class f_product extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -342,7 +331,6 @@ public class f_product extends javax.swing.JFrame {
     private void b_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_tambahActionPerformed
         // TODO add your handling code here:
         class_Product product = new class_Product();
-        product.setProducId(Integer.parseInt(tIdProduct.getText()));
         product.setProductName(tNamaProduct.getText());
         product.kodeCategory(cKategori.getSelectedItem().toString());
         product.setProductDescription(tDeskripsi.getText());
@@ -351,7 +339,6 @@ public class f_product extends javax.swing.JFrame {
         product.tambahProduct();
         reset();
         loadTableProduct();
-        
     }//GEN-LAST:event_b_tambahActionPerformed
 
     private void b_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ubahActionPerformed
@@ -366,7 +353,6 @@ public class f_product extends javax.swing.JFrame {
         product.ubahProduct();
         reset();
         loadTableProduct(); 
-       
     }//GEN-LAST:event_b_ubahActionPerformed
 
     private void b_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_hapusActionPerformed
@@ -406,6 +392,9 @@ public class f_product extends javax.swing.JFrame {
         }else{
             category=null;
         }
+        
+        tIdProduct.setVisible(true);
+        lblID.setVisible(true);
         
         tIdProduct.setText(id);
         tNamaProduct.setText(nama);
@@ -462,7 +451,6 @@ public class f_product extends javax.swing.JFrame {
     private javax.swing.JButton b_tambah;
     private javax.swing.JButton b_ubah;
     private javax.swing.JComboBox<String> cKategori;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -472,6 +460,7 @@ public class f_product extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblID;
     private javax.swing.JTextArea tDeskripsi;
     private javax.swing.JTextField tIdProduct;
     private javax.swing.JTextField tNamaProduct;

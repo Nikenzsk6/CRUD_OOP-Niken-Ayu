@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class class_User extends class_koneksi{
    private String userName, userEmail, userPassword, userFullName; 
    private int userStatus;
-   private final Connection koneksi; //penggunaan FINAL membuat variabel koneksi hanya bisa diisi 1x 
+   private final Connection koneksi;                                //penggunaan FINAL membuat variabel koneksi hanya bisa diisi 1x 
    private PreparedStatement ps;
    private Statement st;
    private ResultSet rs;

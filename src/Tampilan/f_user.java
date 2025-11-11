@@ -5,7 +5,6 @@
 package Tampilan;
 
 import Kelas.class_User;
-import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +29,8 @@ public class f_user extends javax.swing.JFrame {
         t_email.setText(null);
         t_pw.setText(null);
         t_fullname.setText(null);
-        c_status.setSelectedItem(0);
+        c_status.setSelectedIndex(0);
+        t_user.setEditable(true);
     }
 
     void load_table_user() {
@@ -107,7 +107,7 @@ public class f_user extends javax.swing.JFrame {
 
         jLabel5.setText("Status");
 
-        c_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive", " " }));
+        c_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
